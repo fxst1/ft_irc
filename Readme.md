@@ -1,9 +1,9 @@
 # ft_irc
 
--	server:
+-	Server:
 	-	Usage: ./server <port>
 
--	client:
+-	Client:
 	-	Usage: /client [machine [port]]
 	-	Commands:
 		*	/nick <nickname> (9 caracters maximum)
