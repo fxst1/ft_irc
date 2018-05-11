@@ -1,8 +1,8 @@
 # ft_irc
-
+---
 -	Server:
 	-	Usage: ./server <port>
-
+---
 -	Client:
 	-	Usage: /client [machine [port]]
 	-	Commands:
@@ -12,3 +12,4 @@
 		*	/who
 		*	/msg [nick] <message>
 		*	/connect <machine> [port]
+---

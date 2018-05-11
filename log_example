@@ -1,0 +1,72 @@
+Connected to irc_server (195.50.191.14).
+Escape character is '^]'.
+:irc_server NOTICE AUTH :*** Looking up your hostname...
+:irc_server NOTICE AUTH :*** Checking Ident
+:irc_server NOTICE AUTH :*** Found your hostname
+NICK salmioc
+USER guest "localhost" "irc_server" :salemioche
+On s'enregistre avec son nickname (NICK)
+et les informations sur l'utilisateur (USER nom host serveur :_vrai nom_)
+:irc_server NOTICE AUTH :*** No Ident response
+:irc_server 001 salmioc :Welcome to the IRC Network salmioc!~guest@81.48.150.234
+:irc_server 002 salmioc :Your host is irc_server[@0.0.0.0],
+                         running version bahamut-1.4(35)
+:irc_server 003 salmioc :This server was created Thu Nov 21 2002 at 22:25:19 CET
+:irc_server 004 salmioc irc_server bahamut-1.4(35) oOaAbgheFxXj oprRstvc
+:irc_server 005 salmioc NOQUIT WATCH=128 SAFELIST MODES=6 MAXCHANNELS=10
+                        MAXBANS=100 NICKLEN=30 TOPICLEN=307 KICKLEN=307
+                        CHANTYPES=# PREFIX=(ov)@+ NETWORK=DALnet SILENCE=10
+                        CASEMAPPING=ascii CHANMODES=b,k,l,ciLmMnOprRst
+                        :are available on this server
+:irc_server 251 salmioc :There are 1480 users and 80401 invisible on 22 servers
+:irc_server 252 salmioc 60 :IRC Operators online
+:irc_server 254 salmioc 32774 :channels formed
+:irc_server 255 salmioc :I have 18292 clients and 1 servers
+:irc_server 265 salmioc :Current local users: 18292 Max: 31990
+:irc_server 266 salmioc :Current global users: 81881 Max: 124090
+:irc_server NOTICE salmioc :*** Notice -- motd was last changed at 12/11/2002
+                            16:20
+:irc_server 375 salmioc :- irc_server Message of the Day -
+:irc_server 372 salmioc :-                     Welcome to irc_server
+:irc_server 372 salmioc :-                    (a arcor and traced project)
+:irc_server 372 salmioc :-
+:irc_server 372 salmioc :-  This server is located in Frankfurt!
+:irc_server 372 salmioc :-  IRC is an unmoderated medium.       NO CLONEBOTS
+:irc_server 372 salmioc :-  The administration of the server    NO FLOODINGS
+:irc_server 372 salmioc :-  does NOT accept any responsibilty   NO HARASSMENT
+...
+:salmioc MODE salmioc :+i
+JOIN #Beginner
+on joint une salle de discussion (ici #Beginner)
+:salmioc!~guest@81.48.150.234 JOIN :#Beginner
+:irc_server 332 salmioc #Beginner :#beginner - Welcome all and enjoy your chat.
+:irc_server 333 salmioc #Beginner obiewan 1038955544
+:irc_server 353 salmioc = #Beginner :salmioc Sony ^^budak^^ ... ne_dill_na
+:irc_server 353 salmioc = #Beginner :butterfly^02 ...  @BeginBot
+:irc_server 366 salmioc #Beginner :End of /NAMES list.
+:paro!_ucare@210.186.82.159 JOIN :#beginner
+:LKLKLKLK!~ali@202.176.224.37 NICK :smartyspalding
+:Woodsy!ibcvla@h062040214222.dyn.cm.kabsi.at NICK :WEZ
+:CeM^^!~trinket@212.174.49.246 JOIN :#beginner
+:BOSSM!benden@195.174.13.45 JOIN :#beginner
+:nigqechle!~bslhqjiws@pool0551.carthlink.net JOIN :#beginner
+:stalion!~mh399@213.78.72.9 JOIN :#beginner
+:Katyay!~xxxwe@80.116.139.66 QUIT :SendQ exceeded
+:crouse!~MarS58@195.175.198.252 JOIN :#beginner
+:haldunDORMAN!~khaibeth@62.248.17.101 QUIT :Excess Flood
+:miya_fuski!simmy@203.187.196.177 JOIN :#Beginner
+:vvvvvvvvvvvvvvvvv!~2olb_@212.98.145.69 QUIT :Quit:
+:brazilianwoman!~choc@200-203-9-152-cslce70asilia.net.br JOIN :#beginner
+PA:a-a-sn.spam@dsl027-160-021.atl1asy.net PART #beginner :anti-spam v1.0b
+RT
+:irc_server 461 salmioc PART :Not enough parameters
+:ROOSTER^^!~SDFDF@62.150.172.220 QUIT :Quit:
+:jenny--!~jj@host172-204.pool80181.interbusiness.it QUIT :Read/Dead
+                                                         Error: SendQ Exceeded
+:sinkingheart!testing@219.92.93.135 JOIN :#Beginner
+:sona336!~user@210-56-15-139.Dialup.Peshawar.comsats.net.pk JOIN :#Beginner
+:miya_fuski!simmy@203.187.196.177 NICK :funtoosh
+/:a-a-sniffer!no.spam@dsl027-160-021.atl1.dsl.speakeasy.net JOIN :#beginner
+:Super_Momche!~NIKITO@petrich.netissat.net QUIT :Write Error: Broken pipe
+:huyton123!~bullet668@pc-80-192-178-95-wi.blueyonder.co.uk QUIT :Quit:
+QUIT
