@@ -15,6 +15,8 @@
 # include <signal.h>
 # include <unistd.h>
 # include <netdb.h>
+# define TRANSFERT_READ_MODE	0
+# define TRANSFERT_WRITE_MODE	1
 # define TRANSFERT_READY		0
 # define TRANSFERT_CONTINUE		1
 # define TRANSFERT_END			2
@@ -28,6 +30,17 @@
 extern int				errno;
 
 typedef char			t_msg[MSG_LEN_MAX];
+
+typedef struct			s_blob
+{
+	int					fd;
+	int					status;
+	size_t				total_size;
+	size_t				transfer_size;
+	t_msg				buffer;
+	char				*start;
+	char				*pointer;
+}						t_blob;
 
 typedef struct			s_channel
 {
@@ -59,6 +72,7 @@ typedef struct			s_srvclient
 	char				*end;
 	size_t				readed_size;
 	int					transfert_status;
+	t_list				*blob_list;
 }						t_srvclient;
 
 typedef struct			s_server
@@ -108,7 +122,6 @@ typedef struct			s_irc_ui_server
 	GtkEntry			*hostname;
 	GtkEntry			*port;
 	GtkButton			*connectbtn;
-	GtkListBox			*channels;
 	GMutex				mutex;
 	t_server			*server;
 }						t_irc_ui_server;
@@ -129,21 +142,33 @@ typedef struct			s_irc_ui_client
 	GtkEntry			*hostname;
 	GtkEntry			*port;
 	GtkButton			*connectbtn;
-	GtkListBox			*channels;
+	GtkEntry			*nick;
+	GtkEntry			*channel;
+	GtkButton			*modifybtn;
+	GtkListBox			*users;
 	GMutex				mutex;
 	GCond				cond;
 	t_client			*client;
 }						t_irc_ui_client;
 
+typedef struct			s_modif_ui
+{
+	char				*s;
+	t_irc_ui_client		*ui;
+}						t_modif_ui;
 
 void					connect_button_handler(GtkButton *button, gpointer data);
 void					send_button_handler(GtkButton *button, gpointer data);
 
 void					update_connection(t_irc_ui_client *ui, char *host, char *port);
 void					update_log(t_irc_ui_client *ui);
+void					update_nickname(t_irc_ui_client *ui, char *s);
+void					update_channel(t_irc_ui_client *ui, char *s);
 
 void					start_client_thread(t_irc_ui_client *client);
 void					*idle_client_output_refresh(gpointer *data);
+void					*idle_client_nickname_refresh(gpointer *data);
+void					*idle_client_channel_refresh(gpointer *data);
 void					ui_init_str(t_ui_str *s, char *str, t_str_color color);
 void					ui_append_str(t_irc_ui_client *ui, char *str, t_str_color color);
 
@@ -154,6 +179,9 @@ int						irc_server_send(t_server *s, t_srvclient *c, const char *msg);
 int						irc_server_receive(t_server *s, t_srvclient *c, t_msg *msg);
 int						irc_server_command(t_server *s, t_srvclient *c, t_msg msg);
 void					irc_server_command_nick(t_server *s, t_srvclient *c, char **av);
+void					irc_server_command_join(t_server *s, t_srvclient *c, char **av);
+void					irc_server_command_msg(t_server *s, t_srvclient *c, char **av);
+void					irc_server_command_list(t_server *s, t_srvclient *c, char **av);
 
 int						irc_client_init(t_client *c);
 void					irc_client_close(t_client *c);

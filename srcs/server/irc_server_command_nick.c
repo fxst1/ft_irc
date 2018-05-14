@@ -1,11 +1,11 @@
 #include "irc.h"
 
-static void	send_usage(t_server *s, t_srvclient *c)
+static void		send_usage(t_server *s, t_srvclient *c)
 {
 	irc_server_send(s, c, NICK_USAGE_MSG);
 }
 
-int			nickname_avaible(t_server *s, t_srvclient *c, char *nick)
+static int		nickname_avaible(t_server *s, t_srvclient *c, char *nick)
 {
 	size_t		i;
 	t_srvclient	*cl;
@@ -22,20 +22,32 @@ int			nickname_avaible(t_server *s, t_srvclient *c, char *nick)
 	return (1);
 }
 
-void		irc_server_command_nick(t_server *s, t_srvclient *c, char **av)
+static void		send_response(t_server *s, t_srvclient *c)
 {
-	char	*str;
+	char		*str;
+	char		*stmp;
 
+	str = ft_strjoin("INFO ", c->nickname);
+	if (c->ch)
+	{
+		stmp = str;
+		str = ft_strjoin(str, " ");
+		free(stmp);
+		stmp = str;
+		str = ft_strjoin(str, c->ch->name);
+		free(stmp);
+	}
+	irc_server_send(s, c, str);
+}
+
+void			irc_server_command_nick(t_server *s, t_srvclient *c, char **av)
+{
 	if (av[0] && !av[1])
 	{
 		if (av[0][0] && ft_strlen(av[0]) <= 9)
 		{
 			if (nickname_avaible(s, c, av[0]))
-			{
-				str = ft_strjoin("NICK ", av[0]);
-				irc_server_send(s, c, str);
-				free(str);
-			}
+				send_response(s, c);
 			else
 				irc_server_send(s, c, NICK_USED_MSG);
 		}

@@ -9,11 +9,13 @@ static void			init_ui(t_irc_ui_client *ui, t_client *c, char *host, char* port)
 	ui->sendbtn = (GtkButton*)gtk_builder_get_object(ui->builder, "client-send");
 	ui->output = (GtkTextView*)gtk_builder_get_object(ui->builder, "client-output");
 	ui->input = (GtkTextView*)gtk_builder_get_object(ui->builder, "client-input");
-	ui->input = (GtkTextView*)gtk_builder_get_object(ui->builder, "client-input");
 	ui->hostname = (GtkEntry*)gtk_builder_get_object(ui->builder, "client-connect-host");
 	ui->port = (GtkEntry*)gtk_builder_get_object(ui->builder, "client-connect-port");
 	ui->connectbtn = (GtkButton*)gtk_builder_get_object(ui->builder, "client-connect-btn");
-	ui->channels = (GtkListBox*)gtk_builder_get_object(ui->builder, "client-channels");
+	ui->nick = (GtkEntry*)gtk_builder_get_object(ui->builder, "client-nick");
+	ui->channel = (GtkEntry*)gtk_builder_get_object(ui->builder, "client-channel");
+	ui->modifybtn = (GtkButton*)gtk_builder_get_object(ui->builder, "client-modify-btn");
+	ui->users = (GtkListBox*)gtk_builder_get_object(ui->builder, "client-users");
 	ui->tags[0] = (GtkTextTag*)gtk_builder_get_object(ui->builder, "tag-client-def");
 	ui->tags[1] = (GtkTextTag*)gtk_builder_get_object(ui->builder, "tag-client-err");
 	ui->tags[2] = (GtkTextTag*)gtk_builder_get_object(ui->builder, "tag-server-def");
@@ -45,6 +47,23 @@ static void			init_ui(t_irc_ui_client *ui, t_client *c, char *host, char* port)
 
 }
 
+
+static void			clear_output(t_list *out)
+{
+	t_list		*tmp;
+	t_ui_str	*s;
+
+	while (out)
+	{
+		tmp = out->next;
+		s = (t_ui_str*)out->content;
+		free(s->str);
+		free(s);
+		free(out);
+		out = tmp;
+	}
+}
+
 int					main(int ac, char **av)
 {
 	t_irc_ui_client	*ui;
@@ -63,6 +82,19 @@ int					main(int ac, char **av)
 		init_ui(ui, &c, av[1], av[2]);
 	gtk_widget_show((GtkWidget*)ui->window);
 	gtk_main();
+	gtk_widget_destroy((GtkWidget*)ui->window);
+	gtk_widget_destroy((GtkWidget*)ui->input);
+	gtk_widget_destroy((GtkWidget*)ui->output);
+	gtk_widget_destroy((GtkWidget*)ui->sendbtn);
+	gtk_widget_destroy((GtkWidget*)ui->window);
+	gtk_widget_destroy((GtkWidget*)ui->hostname);
+	gtk_widget_destroy((GtkWidget*)ui->port);
+	gtk_widget_destroy((GtkWidget*)ui->connectbtn);
+	gtk_widget_destroy((GtkWidget*)ui->nick);
+	gtk_widget_destroy((GtkWidget*)ui->channel);
+	gtk_widget_destroy((GtkWidget*)ui->modifybtn);
+	gtk_widget_destroy((GtkWidget*)ui->users);
+	clear_output(ui->lines_strs);
 	free(ui);
 	return (0);
 }

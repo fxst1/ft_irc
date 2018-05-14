@@ -36,3 +36,25 @@ void			*idle_client_output_refresh(gpointer *data)
 	}
 	return (NULL);
 }
+
+void			*idle_client_nickname_refresh(gpointer *data)
+{
+	t_modif_ui	*mui;
+
+	mui = (t_modif_ui*)data;
+	gtk_entry_set_text(mui->ui->nick, mui->s);
+	free(mui->s);
+	free(mui);
+	return (NULL);
+}
+
+void			*idle_client_channel_refresh(gpointer *data)
+{
+	t_modif_ui	*mui;
+
+	mui = (t_modif_ui*)data;
+	gtk_entry_set_text(mui->ui->channel, mui->s);
+	free(mui->s);
+	free(mui);
+	return (NULL);
+}

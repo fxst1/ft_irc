@@ -11,6 +11,28 @@ static int		transfert_finished(const char *msg)
 	return (0);
 }
 
+static int		evaluate_data(t_server *s, t_srvclient *c, t_msg *msg, int n)
+{
+	c->readed_size += (size_t)n;
+	c->transfert_status = transfert_finished(c->reading_pointer) ? TRANSFERT_END : TRANSFERT_CONTINUE;
+	if (c->transfert_status == TRANSFERT_END)
+	{
+		printf("Transfert finished\n");
+		ft_bzero(*msg, MSG_LEN_MAX);
+		ft_strncpy(*msg, c->fullmsg, c->readed_size - ft_strlen(MSG_END));
+	}
+	else if (c->readed_size >= MSG_LEN_MAX - 1)
+	{
+		printf("Buffer is filled (not IRC command)\n");
+		return (0);
+	}
+	else
+		printf("transfert: %s - %s (%zu)\n", c->start, c->reading_pointer,
+												c->readed_size);
+	return (1);
+	(void)s;
+}
+
 int				irc_server_receive(t_server *s, t_srvclient *c, t_msg *msg)
 {
 	int	n;
@@ -33,20 +55,8 @@ int				irc_server_receive(t_server *s, t_srvclient *c, t_msg *msg)
 	}
 	else
 	{
-		c->readed_size += (size_t)n;
-		c->transfert_status = transfert_finished(c->reading_pointer) ? TRANSFERT_END : TRANSFERT_CONTINUE;
-		if (c->transfert_status == TRANSFERT_END)
-		{
-			fprintf(stderr, "Transfert finished\n");
-			ft_strcpy(*msg, c->fullmsg);
-		}
-		else if (c->readed_size >= MSG_LEN_MAX - 1)
-		{
-			fprintf(stderr, "Buffer is filled (not IRC command)\n");
+		if (!evaluate_data(s, c, msg, n))
 			return (0);
-		}
-		else
-			fprintf(stderr, "transfert: %s - %s (%zu)\n", c->start, c->reading_pointer, c->readed_size);
 	}
 	return (c->readed_size > 0);
 	(void)s;

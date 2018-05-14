@@ -8,14 +8,12 @@ void		connect_button_handler(GtkButton *button, gpointer data)
 	g_mutex_lock(&ui->mutex);
 	ui->should_stop = 1;
 	g_mutex_unlock(&ui->mutex);
-	printf("LOCK\n");
 	while (ui->started)
 	{
 //		g_mutex_lock(&ui->mutex);
 //		g_cond_wait(&ui->cond, &ui->mutex);
 //		g_mutex_unlock(&ui->mutex);
 	}
-	printf("UNLOCK\n");
 	start_client_thread(ui);
 	(void)button;
 }

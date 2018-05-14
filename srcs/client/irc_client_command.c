@@ -68,8 +68,12 @@ int				irc_client_command(t_irc_ui_client *ui, t_msg msg)
 		myecho(split + 2, ui, server_err_str);
 	else if (!ft_strccmp(split[1], "QUIT"))
 		irc_client_close(ui->client);
-	else if (!ft_strccmp(split[1], "NICK"))
+	else if (!ft_strccmp(split[1], "INFO"))
 		irc_client_command_nick(ui, split + 2);
+	else if (!ft_strccmp(split[1], "MSG"))
+		myecho(split + 2, ui, def_str);
+	else if (!ft_strccmp(split[1], "LIST"))
+		;
 	else
 		undef_command(ui, msg);
 	while (split[i])

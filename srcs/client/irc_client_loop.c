@@ -18,7 +18,7 @@ static int			connection(t_irc_ui_client *ui)
 	hostname = (char*)gtk_entry_get_text(ui->hostname);
 	port = (char*)gtk_entry_get_text(ui->port);
 	if (irc_client_connect(ui->client, hostname, ft_atoi(port)) == 0)
-		ui_append_str(ui, "Connection successfull", log_ok_str);
+		ui_append_str(ui, ft_strdup("Connection successfull"), log_ok_str);
 	else
 	{
 		ret = 0;

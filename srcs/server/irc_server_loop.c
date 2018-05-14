@@ -55,6 +55,7 @@ static t_srvclient		*new_client(t_server *s)
 	}
 	client = (t_srvclient*)ft_memalloc(sizeof(t_srvclient));
 	client->sock = sock;
+	client->ch = NULL;
 	client->sin = client_sin;
 	client->hostname = inet_ntoa(client->sin.sin_addr);
 	client->port = ntohs(client->sin.sin_port);
